@@ -11,7 +11,7 @@ namespace ProjetoEPharma.Infrastructure.Model
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer("Server=DESKTOP-0L3GQTK\\LOCALHOST;Database=eph;User Id=sa;Password=root;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

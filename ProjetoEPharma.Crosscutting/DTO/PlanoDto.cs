@@ -7,7 +7,7 @@ namespace ProjetoEPharma.Crosscutting.DTO
         public int Id { get; set; }
         public DateTime InicioVigencia { get; set; }
         public DateTime FimVigencia { get; set; }
-        public bool PermitePessoaJuridica { get; set; }
+        public char PermitePessoaJuridica { get; set; }
         public DateTime DataCadastro { get; set; }
     }
 }

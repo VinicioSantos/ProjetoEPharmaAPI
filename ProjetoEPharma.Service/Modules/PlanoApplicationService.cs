@@ -21,7 +21,7 @@ namespace ProjetoEPharma.Service.Modules
             return await _uow.PlanoRepository.GetAll();
         }
 
-        public async Task<int> SalvaCliente(PlanoDto dto)
+        public async Task<int> SalvaPlano(PlanoDto dto)
         {
             var entidade = _mapper.MapearEntidade(dto);
             _uow.PlanoRepository.Add(entidade);
