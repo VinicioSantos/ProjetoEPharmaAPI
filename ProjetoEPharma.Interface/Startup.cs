@@ -1,15 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using ProjetoEPharma.Service.DependencyInjection;
 
 namespace ProjetoEPharma.Interface
@@ -32,9 +25,20 @@ namespace ProjetoEPharma.Interface
             services.AddControllers();
 
             services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
+            services.AddSwaggerGen(c => {
+
+                c.SwaggerDoc("v1",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "Projeto Epharma",
+                        Version = "v1",
+                        Description = "Rests para cadastro de cliente e plano",
+                    });
+            });
 
             ConfigureBindingsDependencyInjection.RegisterBindings(services, Configuration);
         }
@@ -50,6 +54,11 @@ namespace ProjetoEPharma.Interface
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "EPharma");
+            });
 
 
             app.UseAuthorization();
